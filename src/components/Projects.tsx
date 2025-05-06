@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 type ProjectCategory = 'all' | 'frontend' | 'machine-learning' | 'full-stack';
 
@@ -12,6 +13,7 @@ interface Project {
   category: 'frontend' | 'machine-learning' | 'full-stack';
   githubUrl: string;
   liveUrl?: string;
+  detailUrl: string;
 }
 
 const Projects: React.FC = () => {
@@ -26,7 +28,8 @@ const Projects: React.FC = () => {
       tags: ["React.js", "Tailwind CSS", "Python", "FastAPI", "BeautifulSoup", "Scikit-Learn", "Transformers"],
       category: "machine-learning",
       githubUrl: "https://github.com/prajwal/research-assistant",
-      liveUrl: "https://research-assistant.demo"
+      liveUrl: "https://research-assistant.demo",
+      detailUrl: "/projects/research-assistant"
     },
     {
       id: 2,
@@ -35,7 +38,8 @@ const Projects: React.FC = () => {
       image: "https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       tags: ["Python", "Streamlit", "Scikit-Learn", "Firebase", "Machine Learning"],
       category: "machine-learning",
-      githubUrl: "https://github.com/prajwal/finance-analyzer"
+      githubUrl: "https://github.com/prajwal/finance-analyzer",
+      detailUrl: "/projects/finance-analyzer"
     },
     {
       id: 3,
@@ -45,7 +49,8 @@ const Projects: React.FC = () => {
       tags: ["React.js", "Tailwind CSS", "Web3.js", "Firebase", "MetaMask"],
       category: "frontend",
       githubUrl: "https://github.com/prajwal/greenledger",
-      liveUrl: "https://greenledger.demo"
+      liveUrl: "https://greenledger.demo",
+      detailUrl: "/projects/green-ledger"
     }
   ];
   
@@ -94,45 +99,51 @@ const Projects: React.FC = () => {
               key={project.id} 
               className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg transition-all hover:shadow-xl hover:-translate-y-1"
             >
-              <div className="relative overflow-hidden h-56">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover transition-transform hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end">
-                  <div className="p-4 w-full flex justify-between items-center">
-                    <div className="flex gap-3">
-                      <a 
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 bg-white/10 backdrop-blur-sm rounded-full text-white hover:bg-white/20 transition-colors"
-                        aria-label="View on GitHub"
-                      >
-                        <Github size={18} />
-                      </a>
-                      {project.liveUrl && (
+              <Link to={project.detailUrl} className="block">
+                <div className="relative overflow-hidden h-56">
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover transition-transform hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end">
+                    <div className="p-4 w-full flex justify-between items-center">
+                      <div className="flex gap-3">
                         <a 
-                          href={project.liveUrl}
+                          href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-2 bg-white/10 backdrop-blur-sm rounded-full text-white hover:bg-white/20 transition-colors"
-                          aria-label="View live project"
+                          className="p-2 bg-white/10 backdrop-blur-sm rounded-full text-white hover:bg-white/20  transition-colors"
+                          aria-label="View on GitHub"
+                          onClick={(e) => e.stopPropagation()}
                         >
-                          <ExternalLink size={18} />
+                          <Github size={18} />
                         </a>
-                      )}
+                        {project.liveUrl && (
+                          <a 
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 bg-white/10 backdrop-blur-sm rounded-full text-white hover:bg-white/20 transition-colors"
+                            aria-label="View live project"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <ExternalLink size={18} />
+                          </a>
+                        )}
+                      </div>
+                      <span className="text-xs uppercase tracking-wider text-white/90 font-medium px-2 py-1 bg-white/10 backdrop-blur-sm rounded-full">
+                        {project.category}
+                      </span>
                     </div>
-                    <span className="text-xs uppercase tracking-wider text-white/90 font-medium px-2 py-1 bg-white/10 backdrop-blur-sm rounded-full">
-                      {project.category}
-                    </span>
                   </div>
                 </div>
-              </div>
+              </Link>
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{project.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
+                <Link to={project.detailUrl}>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{project.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
+                </Link>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag, index) => (
                     <span 
