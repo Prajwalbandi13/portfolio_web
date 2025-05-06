@@ -16,7 +16,7 @@ const FinanceAnalyzer: React.FC = () => {
           
           <div className="flex flex-wrap gap-4 mb-8">
             <a 
-              href="https://github.com/prajwal/finance-analyzer"
+              href="https://github.com/Prajwalbandi13/FinanceShield.git"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
@@ -29,7 +29,7 @@ const FinanceAnalyzer: React.FC = () => {
           <img 
             src="https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="Finance Analyzer Preview"
-            className="w-full rounded-xl shadow-lg mb-12"
+            className="w-[700px] h-[470px] rounded-xl shadow-lg mb-8 mx-auto object-cover"
           />
 
           <div className="prose prose-lg dark:prose-invert max-w-none">
